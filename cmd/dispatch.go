@@ -23,7 +23,7 @@ import (
 )
 
 var requests int
-var time int
+var totalTime int
 var url string
 var method string
 var body string
@@ -43,14 +43,16 @@ to quickly create a Cobra application.`,
 		// Main invocation to be done here
 		logrus.WithFields(logrus.Fields{
 			"Request Num": requests,
-			"Time": time,
+			"Time": totalTime,
 			"URL": url,
 			"Method Type": method,
 			"Body Path": body,
 		}).Info("Printing Request information")
 		switch method {
-		case "GET":
-			client.GetRequest(url)
+		case "GET":{
+			// Call client.Get for time: times
+			client.Get(url, requests, totalTime)
+		}
 		case "POST":{
 				if body == "" {
 					logrus.Fatal("Body not provided")
@@ -71,7 +73,7 @@ func init() {
 
 	// Set Flags for this command:
 	dispatchCmd.PersistentFlags().IntVar(&requests, "request", 1, "Number of requests to be fired")
-	dispatchCmd.PersistentFlags().IntVar(&time, "time", 1, "Duration of the test")
+	dispatchCmd.PersistentFlags().IntVar(&totalTime, "time", 1, "Duration of the test")
 	dispatchCmd.PersistentFlags().StringVar(&url, "url", "http://localhost:8080/get", "URL to stress test")
 	dispatchCmd.PersistentFlags().StringVar(&method, "X", "GET", "Request Type")
 	dispatchCmd.PersistentFlags().StringVar(&body, "body", "", "Path to the JSON Body")
