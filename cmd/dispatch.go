@@ -41,13 +41,12 @@ func callPost(wg *sync.WaitGroup) {
 // dispatchCmd represents the dispatch command
 var dispatchCmd = &cobra.Command{
 	Use:   "dispatch",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Makes HTTP calls",
+	Long: `dispatch command is used to bombard the 
+user specified URL with the number of requests mentioned.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+It sends HTTP requests and provides appropriate information on the
+success/failure of the activity.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Main invocation to be done here
 		logrus.WithFields(logrus.Fields{
