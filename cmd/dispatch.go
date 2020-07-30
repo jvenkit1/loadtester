@@ -17,9 +17,9 @@ package cmd
 
 import (
 	"github.com/sirupsen/logrus"
-	"loadtester/client"
-
 	"github.com/spf13/cobra"
+	"loadtester/client"
+	"sync"
 )
 
 var requests int
@@ -28,6 +28,11 @@ var url string
 var method string
 var body string
 
+func callGet(id int, wg *sync.WaitGroup){
+	defer wg.Done()
+	logrus.Info("Inside callGet")
+	client.Get(url, requests, totalTime)
+}
 
 // dispatchCmd represents the dispatch command
 var dispatchCmd = &cobra.Command{
@@ -48,10 +53,15 @@ to quickly create a Cobra application.`,
 			"Method Type": method,
 			"Body Path": body,
 		}).Info("Printing Request information")
+		var wg sync.WaitGroup
 		switch method {
 		case "GET":{
 			// Call client.Get for time: times
-			client.Get(url, requests, totalTime)
+			for i:=1;i<=totalTime;i++ {
+				wg.Add(1)
+				go callGet(i, &wg)
+			}
+			wg.Wait()
 		}
 		case "POST":{
 				if body == "" {
