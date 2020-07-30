@@ -28,10 +28,14 @@ var url string
 var method string
 var body string
 
-func callGet(id int, wg *sync.WaitGroup){
+func callGet(wg *sync.WaitGroup){
 	defer wg.Done()
-	logrus.Info("Inside callGet")
 	client.Get(url, requests, totalTime)
+}
+
+func callPost(wg *sync.WaitGroup) {
+	defer wg.Done()
+	client.Post(url, requests, totalTime, body)
 }
 
 // dispatchCmd represents the dispatch command
@@ -59,7 +63,7 @@ to quickly create a Cobra application.`,
 			// Call client.Get for time: times
 			for i:=1;i<=totalTime;i++ {
 				wg.Add(1)
-				go callGet(i, &wg)
+				go callGet(&wg)
 			}
 			wg.Wait()
 		}
@@ -67,7 +71,12 @@ to quickly create a Cobra application.`,
 				if body == "" {
 					logrus.Fatal("Body not provided")
 				}
-				client.PostRequest(url, body)
+				//client.PostRequest(url, body)
+				for i:=1;i<=totalTime;i++ {
+					wg.Add(1)
+					go callPost(&wg)
+				}
+				wg.Wait()
 			}
 		}
 	},
