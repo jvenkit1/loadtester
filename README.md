@@ -1,6 +1,3 @@
-# loadtester
-A Simple Load Testing tool
-
 # Introduction
 
 This is a general load testing tool for any REST endpoint. 
@@ -17,6 +14,7 @@ Currently this tool supports load testing GET and POST APIs.
 Run the following command to generate an executable:
 
 ```
+make dep
 make build
 ```
 
@@ -25,13 +23,15 @@ This will download all dependencies and generate the executable.
 # Usage:
 
 Following are the flags that are to be set for a general use:
-1. --X = Type of the API (GET/POST)
-2. --body = Path to the JSON body for the request
-3. --request = Number of requests to be sent
-4. --time = Duration of testing
-5. --url = Endpoint URL
+1. --X = Type of the API (GET/POST) [Default GET]
+2. --body = Path to the JSON body for the request [Default NULL]
+3. --request = Number of requests to be sent [Default 1]
+4. --time = Duration of testing [Default 1]
+5. --url = Endpoint URL [Default NULL]
 
-A typical usage is as follows:
+Sample usages are as follows:
+
+### Typical GET API Usage
 
 ```
 ./ltest --X GET --request 100 --time 10 --url http://localhost:8080/get
@@ -39,3 +39,10 @@ A typical usage is as follows:
 
 This will send a total of 100 GET API requests over 10 seconds, to the specified URL.
 
+### Typical POST API Usage
+
+```
+./test --X POST --request 100 --time 10 --url http://localhost:8080/post --body = utils/bZ/
+
+```
+This request sends a total of 100 POST API requests over 10 seconds.
