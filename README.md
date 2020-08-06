@@ -34,7 +34,7 @@ Sample usages are as follows:
 ### Typical GET API Usage
 
 ```
-./ltest --X GET --request 100 --time 10 --url http://localhost:8080/get
+./ltest dispatch --X GET --request 100 --time 10 --url http://localhost:8080/get
 ```
 
 This will send a total of 100 GET API requests over 10 seconds, to the specified URL.
@@ -42,7 +42,7 @@ This will send a total of 100 GET API requests over 10 seconds, to the specified
 ### Typical POST API Usage
 
 ```
-./test --X POST --request 100 --time 10 --url http://localhost:8080/post --body = utils/bZ/
+./test dispatch --X POST --request 100 --time 10 --url http://localhost:8080/post --body = utils/bZ/
 
 ```
 This request sends a total of 100 POST API requests over 10 seconds.
