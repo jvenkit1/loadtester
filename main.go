@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "loadtester/cmd"
+import "github.com/jvenkit1/loadtester/cmd"
 
 func main() {
 	cmd.Execute()

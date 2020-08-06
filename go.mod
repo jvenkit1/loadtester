@@ -1,4 +1,4 @@
-module loadtester
+module github.com/jvenkit1/loadtester
 
 go 1.14
 
