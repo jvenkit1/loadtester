@@ -12,7 +12,6 @@ dep:
 	$(GOMOD)
 
 build:
-	make dep
 	$(GOBUILD) -o $(BINARY_NAME) -v
 
 test:

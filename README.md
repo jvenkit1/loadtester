@@ -42,7 +42,7 @@ This will send a total of 100 GET API requests over 10 seconds, to the specified
 ### Typical POST API Usage
 
 ```
-./test dispatch --X POST --request 100 --time 10 --url http://localhost:8080/post --body = utils/bZ/
+./test dispatch --X POST --request 100 --time 10 --url http://localhost:8080/post --body = utils/body.json
 
 ```
 This request sends a total of 100 POST API requests over 10 seconds.
